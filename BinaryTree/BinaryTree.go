@@ -1,40 +1,14 @@
-package main
+package BinaryTree
 
 import (
-	"Collection/stack"
-	"fmt"
+	"github.com/kxiaong/goCommonLib/stack"
 )
 
+// Define Tree Node
 type TreeNode struct {
 	Val interface{}
 	Left *TreeNode
 	Right *TreeNode
-}
-
-func main(){
-	root := &TreeNode{Val: 1}
-	root.Left = &TreeNode{Val: 2}
-	root.Right = &TreeNode{Val: 3}
-
-	root.Left.Right = &TreeNode{Val: 5}
-	root.Right.Left = &TreeNode{Val: 6}
-
-	root.Left.Right.Left = &TreeNode{Val: 8}
-	root.Left.Right.Right = &TreeNode{Val: 9}
-
-	root.Right.Left.Right = &TreeNode{Val: 11}
-
-	//PreOrderTraversal(root)
-	//fmt.Println("********")
-	//PreOrderIterTraversal(root)
-
-	//InorderTraversal(root)
-	//fmt.Println("********")
-	//InorderIterTraversal(root)
-
-	PostOrderTraversal(root)
-	fmt.Println("********")
-	PostOrderIterTraversal(root)
 }
 
 
@@ -44,12 +18,16 @@ func PreOrderTraversal(root *TreeNode){
 	if root == nil{
 		return
 	}
-	fmt.Println(root.Val)
+
+	// 访问根节点
+	// fmt.Println(root.Val)
+
+	//分别递归地遍历左子树和右子树
 	PreOrderTraversal(root.Left)
 	PreOrderTraversal(root.Right)
 }
 
-func PreOrderIterTraversal(root *TreeNode){
+func PreOrderIterTraversal(root *TreeNode) []interface{
 	// 先序遍历二叉树
 	// 非递归方法
 
@@ -64,23 +42,20 @@ func PreOrderIterTraversal(root *TreeNode){
 	if root == nil{
 		return
 	}
-	result := make([]int, 0)
+	result := make([]interface, 0)
 	nodeStack := stack.NewStack()
 
 	for root != nil || !nodeStack.IsEmpty(){
 		for root != nil{
-			//先序遍历，保存结果
-			//result.PushBack(root.Val)
-			result = append(result, root.Val.(int))
+			// 先序遍历，保存结果
+			result = append(result, root.Val)
 			nodeStack.Push(root)
 			root = root.Left
 		}
 		root = nodeStack.Pop().(*TreeNode).Right
 	}
 
-	for _, v := range result{
-		fmt.Println(v)
-	}
+	return result
 }
 
 func  InorderTraversal(root *TreeNode){
@@ -89,12 +64,18 @@ func  InorderTraversal(root *TreeNode){
 	if root == nil{
 		return
 	}
+
+	// 递归地遍历左子树
 	InorderTraversal(root.Left)
+
+	// 访问根节点
 	fmt.Println(root.Val.(int))
+
+	// 递归地遍历右子树
 	InorderTraversal(root.Right)
 }
 
-func InorderIterTraversal(root *TreeNode){
+func InorderIterTraversal(root *TreeNode) []interface{
 	// 中序遍历，非递归方法
 	/*
 		1. 将当前结点p压入stack
@@ -106,7 +87,7 @@ func InorderIterTraversal(root *TreeNode){
 		return
 	}
 
-	result := make([]int, 0)
+	result := make([]interface, 0)
 	nodeStack := stack.NewStack()
 
 	for root != nil || !nodeStack.IsEmpty(){
@@ -116,13 +97,11 @@ func InorderIterTraversal(root *TreeNode){
 		}
 
 		root = nodeStack.Pop().(*TreeNode)
-		result = append(result, root.Val.(int))
+		result = append(result, root.Val)
 		root = root.Right
 	}
 
-	for _, v := range result{
-		fmt.Println(v)
-	}
+	return result
 }
 
 func PostOrderTraversal(root *TreeNode){
@@ -131,21 +110,21 @@ func PostOrderTraversal(root *TreeNode){
 		return
 	}
 
+	// 分别递归地遍历左子树和右子树
 	PostOrderTraversal(root.Left)
 	PostOrderTraversal(root.Right)
+
+	// 访问根节点
 	fmt.Println(root.Val.(int))
 }
 
-func PostOrderIterTraversal(root *TreeNode){
+func PostOrderIterTraversal(root *TreeNode) []interface{
 	// 后序遍历，非递归方法
-	/*
-		1.
-	 */
 	if root == nil{
 		return
 	}
 
-	result := make([]int, 0)
+	result := make([]interface, 0)
 	nodes := stack.NewStack()
 	var lastVisit *TreeNode
 
@@ -157,12 +136,11 @@ func PostOrderIterTraversal(root *TreeNode){
 		peak := nodes.Peak().(*TreeNode)
 		if peak.Right == nil || peak.Right == lastVisit{
 			lastVisit = nodes.Pop().(*TreeNode)
-			result = append(result, lastVisit.Val.(int))
+			result = append(result, lastVisit.Val)
 		}else{
 			root = peak.Right
 		}
 	}
-
-	fmt.Println(result)
+	
+	return result
 }
-
