@@ -12,10 +12,12 @@ func NewStack() *Stack{
 }
 
 func (stack *Stack) Push(value interface{}){
+	// push element to stack
 	stack.list.PushBack(value)
 }
 
 func (stack *Stack) Pop() interface{}{
+	// pop element from stack
 	e := stack.list.Back()
 	if e!= nil{
 		stack.list.Remove(e)
@@ -25,6 +27,7 @@ func (stack *Stack) Pop() interface{}{
 }
 
 func (stack *Stack) Peak() interface{}{
+	// 只检查栈顶元素，不弹出栈顶元素
 	e := stack.list.Back()
 	if e!= nil{
 		return e.Value
@@ -33,6 +36,7 @@ func (stack *Stack) Peak() interface{}{
 }
 
 func (stack *Stack) Len() int{
+	// 当前栈大小（元素个数）
 	return stack.list.Len()
 }
 
@@ -44,4 +48,3 @@ func (stack *Stack) Init() *Stack{
 	return NewStack()
 }
 
-func New() *Stack{return new(Stack).Init()}

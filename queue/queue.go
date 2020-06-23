@@ -7,9 +7,9 @@ import "errors"
 
 type Queue struct {
 	queue []interface{}
-	front int
-	rear int
-	Cap int
+	front int    //出队指针
+	rear  int    //入队指针
+	Cap   int    //队列容量
 }
 
 func NewQueue(cap int) *Queue{
