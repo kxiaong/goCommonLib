@@ -1,5 +1,5 @@
 package dictionaryString
-// sort a string array by dictionary order by heap
+// sort a string array by dictionary order
 // Usage:
 // sh := &StringHeap{"some", "string", "here"}
 // heap.Push(sh, "pushed string")
