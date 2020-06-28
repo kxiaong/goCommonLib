@@ -3,3 +3,4 @@
 - [stack](./stack/stack.go)  ：基于`golang`的`list`实现的栈结构.
 - [queue](./queue/queue.go)：基于`golang`的`slice`实现的循环队列结构
 - [Binary Tree](./BinaryTree/BinaryTree.go): 二叉树的`先序遍历`、`中序遍历`、`后序遍历`的递归与非递归实现.
+- [Dictionary String](./dictionaryString/dictString.go)：基于`heap`实现的字符串字典序排列器.将一组字符串按照字典序排序.
